@@ -73,7 +73,7 @@ class MySkillsSection extends StatelessWidget {
         color: kcomponentBackground, // Choose your preferred color
         borderRadius: BorderRadius.circular(20.0),
       ),
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +82,7 @@ class MySkillsSection extends StatelessWidget {
             "My Skills",
             style: headlabel(isWideScreen),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: isWideScreen ? 4 : 2,
@@ -91,7 +91,7 @@ class MySkillsSection extends StatelessWidget {
             ),
             itemCount: mySkills.length,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               final skill = mySkills[index];
               return SkillItem(
@@ -112,8 +112,8 @@ class SkillItem extends StatefulWidget {
   final double screenWidth; // Add screenWidth
   final bool isWideScreen;
 
-  SkillItem(
-      {required this.skill,
+  const SkillItem(
+      {super.key, required this.skill,
       required this.isWideScreen,
       required this.screenWidth});
 
@@ -149,7 +149,7 @@ class _SkillItemState extends State<SkillItem> {
         });
       },
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         width: isHovered ? hoverCardSize : cardSize,
         height: isHovered ? hoverCardSize : cardSize,
         decoration: BoxDecoration(
@@ -159,7 +159,7 @@ class _SkillItemState extends State<SkillItem> {
               isHovered ? Border.all(color: konhoverpurble, width: 2.0) : null,
         ),
         child: AnimatedSwitcher(
-          duration: Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 200),
           child: isHovered
               ? SkillCardText(
                   skill: widget.skill,
@@ -185,8 +185,8 @@ class SkillCardText extends StatelessWidget {
   final double cardSize;
   final double hoverCardSize;
 
-  SkillCardText(
-      {required this.skill,
+  const SkillCardText(
+      {super.key, required this.skill,
       required this.isWideScreen,
       required this.cardSize,
       required this.hoverCardSize});
@@ -209,7 +209,7 @@ class SkillCardText extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               Text(
                 skill.explain!,
                 style: GoogleFonts.openSans(
@@ -229,8 +229,8 @@ class SkillCardImage extends StatelessWidget {
   final double cardSize;
   final double hoverCardSize;
 
-  SkillCardImage(
-      {required this.skill,
+  const SkillCardImage(
+      {super.key, required this.skill,
       required this.isWideScreen,
       required this.cardSize,
       required this.hoverCardSize});

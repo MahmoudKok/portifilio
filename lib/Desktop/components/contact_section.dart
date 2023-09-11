@@ -280,7 +280,7 @@ class _ContactCicleState extends State<ContactCicle> {
               ? widget.screenWidth * 0.16
               : widget.screenWidth * 0.14,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: kyellow,
             ),

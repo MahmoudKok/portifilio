@@ -1,10 +1,7 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 
 import '../../helpers/constants.dart';
 import '../../helpers/responsive.dart';
@@ -54,7 +51,7 @@ class MyCodingKnowledgeScreen extends StatelessWidget {
         color: kcomponentBackground, // Choose your preferred color
         borderRadius: BorderRadius.circular(20.0),
       ),
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +60,7 @@ class MyCodingKnowledgeScreen extends StatelessWidget {
             "My Coding Knowledge",
             style: headlabel(isWideScreen),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: isWideScreen ? 4 : 2,
@@ -72,7 +69,7 @@ class MyCodingKnowledgeScreen extends StatelessWidget {
             ),
             itemCount: codeknowledge.length,
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) {
               final knowledge = codeknowledge[index];
               return CodingItem(
@@ -94,8 +91,8 @@ class CodingItem extends StatefulWidget {
   final bool isWideScreen;
   final double screenHeight;
 
-  CodingItem(
-      {required this.screenWidth,
+  const CodingItem(
+      {super.key, required this.screenWidth,
       required this.knowledge,
       required this.isWideScreen,
       required this.screenHeight});
@@ -132,7 +129,7 @@ class _CodingItemState extends State<CodingItem> {
           });
         },
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           width: isHovered ? cardSize * 1.1 : cardSize,
           height: isHovered ? cardSize * 1.1 : cardSize,
           decoration: BoxDecoration(
@@ -163,7 +160,7 @@ class _CodingItemState extends State<CodingItem> {
                     ),
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 Expanded(
                   flex: 2,
                   child: Row(
@@ -253,7 +250,7 @@ class _CodingItemState extends State<CodingItem> {
                       height: cardSize,
                       child: Center(
                         child: RatingBar(
-                          rating: (widget.knowledge.percent! / 10).toInt(),
+                          rating: widget.knowledge.percent! ~/ 10,
                           size: (cardSize * 0.6) /
                               10, // Adjust the size as needed
                           filledColor: kpink,
@@ -278,7 +275,7 @@ class RatingBar extends StatelessWidget {
   final Color filledColor;
   final Color emptyColor;
 
-  RatingBar({
+  const RatingBar({super.key, 
     required this.rating,
     this.size = 20.0,
     this.filledColor = kpink,
@@ -319,7 +316,7 @@ class HexagonShape extends StatelessWidget {
   final double size;
   final Color color;
 
-  HexagonShape({required this.size, required this.color});
+  const HexagonShape({super.key, required this.size, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -365,7 +362,7 @@ class OctagramStarShape extends StatelessWidget {
   final double size;
   final Color color;
 
-  OctagramStarShape({required this.size, required this.color});
+  const OctagramStarShape({super.key, required this.size, required this.color});
 
   @override
   Widget build(BuildContext context) {

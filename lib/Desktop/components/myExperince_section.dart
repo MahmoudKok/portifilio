@@ -39,7 +39,7 @@ class MyExperincesScreen extends StatelessWidget {
         color: kcomponentBackground, // Use your preferred color
         borderRadius: BorderRadius.circular(20.0),
       ),
-      padding: EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -47,7 +47,7 @@ class MyExperincesScreen extends StatelessWidget {
             "My Experiences",
             style: headlabel(isWideScreen),
           ),
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal, // Allow horizontal scrolling
             child: Row(
@@ -81,8 +81,8 @@ class ExperienceItem extends StatefulWidget {
   final ExperinceModel experience;
   final bool isWideScreen;
 
-  ExperienceItem(
-      {required this.screenWidth,
+  const ExperienceItem(
+      {super.key, required this.screenWidth,
       required this.experience,
       required this.isWideScreen,
       required this.screenHeight});
@@ -120,7 +120,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
           });
         },
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           width: cardSize,
           height: cardSize * 1.3,
           decoration: BoxDecoration(
@@ -131,9 +131,9 @@ class _ExperienceItemState extends State<ExperienceItem> {
                 : null,
           ),
           child: Padding(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               child: isHovered
                   ? Padding(
                       padding: EdgeInsets.all(cardSize * 0.01),
@@ -149,7 +149,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
                               color: Colors.white,
                             ),
                           ),
-                          SizedBox(height: 8.0),
+                          const SizedBox(height: 8.0),
                           Text(
                             widget.experience.explain!,
                             style: GoogleFonts.raleway(
@@ -179,7 +179,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
                             height: cardSize * 0.2,
                             decoration: BoxDecoration(
                               color: kyellow,
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(10),
                                 bottomRight: Radius.circular(10),
                               ),
@@ -188,7 +188,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
                                   color: Colors.black.withOpacity(0.2),
                                   spreadRadius: 2,
                                   blurRadius: 4,
-                                  offset: Offset(0, 2),
+                                  offset: const Offset(0, 2),
                                 ),
                               ],
                             ),

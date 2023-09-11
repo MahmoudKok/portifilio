@@ -1,3 +1,5 @@
 {
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "editor.suggest.selectionMode": "always",
+    "vim.useCtrlKeys": false
 }

@@ -6,14 +6,14 @@ class Responsive {
   }
 
   bool isMobile(BuildContext context) {
-    return screenWidth(context) < 768; // Adjust this threshold as needed
+    return screenWidth(context) < 615; // Adjust this threshold as needed
   }
 
   bool isTablet(BuildContext context) {
-    return screenWidth(context) >= 768 && screenWidth(context) < 1024;
+    return screenWidth(context) >= 640 && screenWidth(context) < 1007;
   }
 
   bool isDesktop(BuildContext context) {
-    return screenWidth(context) >= 1024;
+    return screenWidth(context) >= 1008;
   }
 }
