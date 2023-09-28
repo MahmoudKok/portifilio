@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:portifilio/Desktop/widgets/aboutMe_section/desktop_aboutme.dart';
+import 'package:portifilio/Desktop/widgets/aboutMe_section/mobile_aboutme.dart';
+import 'package:portifilio/Desktop/widgets/aboutMe_section/tablet_aboutme.dart';
 import 'package:portifilio/helpers/constants.dart';
 import 'package:portifilio/helpers/responsive.dart';
 
@@ -28,61 +31,23 @@ Let's connect and collaborate! Feel free to reach out if you share the same pass
     double screenHeight = MediaQuery.of(context).size.height;
     Responsive res = Responsive();
     bool isWideScreen = res.isDesktop(context);
-
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: screenWidth * 0.05,
-        vertical: isWideScreen ? 80 : 40,
-      ),
-      decoration: BoxDecoration(
-        color: kcomponentBackground,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(top: 30, left: 62, right: 62),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              flex: isWideScreen ? 2 : 3,
-              child: Image.asset('assets/images/about_me.png'),
-            ),
-            SizedBox(width: isWideScreen ? 40 : 20),
-            Expanded(
-              flex: isWideScreen ? 3 : 5,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'About Me',
-                    style: GoogleFonts.changa(
-                      color: darkWihte,
-                      fontSize: isWideScreen ? 36 : 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    aboutMe,
-                    style: GoogleFonts.changa(
-                      color: darkWihte,
-                      fontSize: isWideScreen ? 18 : 16,
-                    ),
-                  ),
-                  const SizedBox(height: 40),
-                  Text(
-                    'MAHM',
-                    style: GoogleFonts.greatVibes(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return res.isDesktop(context)
+        ? DesktopAboutMe(
+            screenWidth: screenWidth,
+            isWideScreen: isWideScreen,
+            aboutMe: aboutMe,
+            screenHeight: screenHeight,
+          )
+        : (res.isTablet(context)
+            ? TabletAboutMe(
+                screenWidth: screenWidth,
+                isWideScreen: isWideScreen,
+                screenHeight: screenHeight,
+                aboutMe: aboutMe)
+            : MobileAboutMe(
+                screenWidth: screenWidth,
+                isWideScreen: isWideScreen,
+                screenHeight: screenHeight,
+                aboutMe: aboutMe));
   }
 }

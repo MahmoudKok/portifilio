@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 const kdarkgrey = Color.fromARGB(255, 58, 58, 58);
 
@@ -27,14 +28,14 @@ Text headSection(String label) {
   return Text(
     label,
     style: GoogleFonts.changa(
-        color: darkWihte, fontSize: 70, fontWeight: FontWeight.normal),
+        color: darkWihte, fontSize: 10, fontWeight: FontWeight.normal),
   );
 }
 
 TextStyle headlabel(isWideScreen) {
   return GoogleFonts.changa(
     color: darkWihte,
-    fontSize: isWideScreen ? 36 : 28,
+    fontSize: isWideScreen ? 36.sp : 30.sp,
     fontWeight: FontWeight.bold,
   );
 }

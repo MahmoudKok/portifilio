@@ -1,19 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:math';
-import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portifilio/Desktop/widgets/land_section/desktop_land.dart';
 import 'package:portifilio/Desktop/widgets/land_section/mobile_land.dart';
 import 'package:portifilio/Desktop/widgets/land_section/tablet_land.dart';
 
-import 'package:portifilio/helpers/constants.dart';
 import 'package:portifilio/helpers/responsive.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-import '../widgets/land_section/land_section_widgets.dart';
 
 // ignore: must_be_immutable
 class LandingSection extends StatefulWidget {
@@ -140,6 +132,7 @@ class _LandingSectionState extends State<LandingSection>
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     Responsive res = Responsive();
     bool isWideScreen = res.isDesktop(context);
     bool isTablet = res.isTablet(context);
@@ -154,9 +147,12 @@ class _LandingSectionState extends State<LandingSection>
         ********************************************************************************************************
         */
     return isWideScreen
-        ? DesktopLand(
-            screenHeight: screenHeight,
-            screenWidth: screenWidth,
+        ? Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: DesktopLand(
+              screenHeight: screenHeight,
+              screenWidth: screenWidth,
+            ),
           )
         /********************************************************************************************************
         ************************************************************************************************************
@@ -166,23 +162,29 @@ class _LandingSectionState extends State<LandingSection>
         ***************************************************************************************************************
         ********************************************************************************************************
         */
-        : (isMobile
-            ? MobileLand(
-                screenHeight: screenHeight,
-                screenWidth: screenWidth,
-              )
-            /********************************************************************************************************
-        ************************************************************************************************************
-        ********************************************************************************************************
-        ***********************************************Tablet*********************************************************
-        ********************************************************************************************************
-        ***************************************************************************************************************
-        ********************************************************************************************************
-        */
-            : TabletLand(
-                screenHeight: screenHeight,
-                screenWidth: screenWidth,
-              ));
+        : Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: (isMobile
+                ? MobileLand(
+                    screenHeight: screenHeight,
+                    screenWidth: screenWidth,
+                  )
+                /********************************************************************************************************
+          ************************************************************************************************************
+          ********************************************************************************************************
+          ***********************************************Tablet*********************************************************
+          ********************************************************************************************************
+          ***************************************************************************************************************
+          ********************************************************************************************************
+          */
+                : Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: TabletLand(
+                      screenHeight: screenHeight,
+                      screenWidth: screenWidth,
+                    ),
+                  )),
+          );
   }
 }
 

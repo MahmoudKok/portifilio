@@ -3,10 +3,14 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:get/get.dart';
+import 'package:portifilio/Desktop/controllers/Animted_text_controller.dart';
+import 'package:portifilio/Desktop/controllers/random_circles_controller.dart';
 
 import '/../../helpers/constants.dart';
 
-class RandomCirclesWithLines extends StatelessWidget {
+class RandomCirclesWithLines extends StatefulWidget {
   const RandomCirclesWithLines({
     super.key,
     required this.containerWidth,
@@ -20,34 +24,10 @@ class RandomCirclesWithLines extends StatelessWidget {
   final int numberOfCircles;
 
   @override
-  Widget build(BuildContext context) {
-    return RandomCirclesContainer(
-      containerWidth: containerWidth,
-      containerHeight: containerHeight,
-      numberOfCircles: numberOfCircles,
-      isDesktop: isDesktop,
-    );
-  }
+  _RandomCirclesWithLinesState createState() => _RandomCirclesWithLinesState();
 }
 
-class RandomCirclesContainer extends StatefulWidget {
-  const RandomCirclesContainer({
-    super.key,
-    required this.containerWidth,
-    required this.containerHeight,
-    required this.numberOfCircles,
-    required this.isDesktop,
-  });
-  final bool isDesktop;
-  final double containerHeight;
-  final double containerWidth;
-  final int numberOfCircles;
-
-  @override
-  _RandomCirclesContainerState createState() => _RandomCirclesContainerState();
-}
-
-class _RandomCirclesContainerState extends State<RandomCirclesContainer>
+class _RandomCirclesWithLinesState extends State<RandomCirclesWithLines>
     with TickerProviderStateMixin {
   List<Offset> points = []; // Store the positions of generated points
   List<Color> shadesOfYellow = [
@@ -135,19 +115,12 @@ class _RandomCirclesContainerState extends State<RandomCirclesContainer>
     return Positioned(
       left: position.dx,
       top: position.dy,
-      child: ImageFiltered(
-        imageFilter: ImageFilter.blur(
-          sigmaX: 1.0,
-          sigmaY: 2.0,
-          tileMode: TileMode.mirror,
-        ),
-        child: Container(
-          width: 20, // Adjust the size as needed
-          height: 20,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: randomYellowColor,
-          ),
+      child: Container(
+        width: 20, // Adjust the size as needed
+        height: 20,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: randomYellowColor,
         ),
       ),
     );
@@ -180,30 +153,44 @@ class _RandomCirclesContainerState extends State<RandomCirclesContainer>
     for (int i = 0; i < widget.numberOfCircles; i++) {
       children.add(createRandomCircle(points[i])); // Add a new circle
     }
-    if (!widget.isDesktop) {
-      children.add(Center(
-        child: Container(
-          margin: const EdgeInsets.all(0),
-          child: Image.asset(
-            "assets/images/land_screen.png", // Replace with your image asset path
-            height: widget.containerHeight,
-            fit: BoxFit.contain,
-          ),
-        ),
-      ));
-    }
+
     return SizedBox(
       width: widget.containerWidth,
       height: widget.containerHeight,
       child: Stack(
         children: [
           Positioned.fill(
-            child: Stack(
-              children: [
-                ...createLinesBetweenCircles(), // Add lines between circles
-                ...children, // Add circles
-              ],
-            ),
+            child: widget.isDesktop
+                ? Stack(
+                    children: [
+                      ...createLinesBetweenCircles(), // Add lines between circles
+                      ...children, // Add circles
+                    ],
+                  )
+                : Stack(
+                    children: [
+                      ...createLinesBetweenCircles(),
+                      ImageFiltered(
+                          imageFilter:
+                              ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
+                          child: SizedBox(
+                            width: double.maxFinite,
+                            child: Stack(
+                              children: children,
+                            ),
+                          )),
+                      Center(
+                        child: Container(
+                          margin: const EdgeInsets.all(0),
+                          child: Image.asset(
+                            "assets/images/land_screen.png",
+                            height: widget.containerHeight,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
           ),
         ],
       ),
@@ -234,16 +221,45 @@ class LinePainter extends CustomPainter {
   }
 }
 
-class AnimatedTextWidget extends StatefulWidget {
+class AnimatedTextWidget extends StatelessWidget {
   final String label;
   final TextStyle style;
-  final int typingSpeed; // Speed in milliseconds
+  final Duration animationDuration;
 
   AnimatedTextWidget({
     required this.label,
     required this.style,
-    this.typingSpeed = 100, // Default typing speed
+    this.animationDuration = const Duration(milliseconds: 100),
   });
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = Get.put<TypewriterController>(
+        TypewriterController(
+          label,
+          animationDuration,
+        ),
+        tag: label);
+
+    return Obx(
+      () => Text(
+        controller.animatedText.value,
+        style: style,
+      ),
+    );
+  }
+}
+/*class AnimatedTextWidget extends StatefulWidget {
+  final String label;
+  final TextStyle style;
+  final int typingSpeed; // Speed in milliseconds
+
+  const AnimatedTextWidget({
+    Key? key,
+    required this.label,
+    required this.style,
+    this.typingSpeed = 1, // Default typing speed
+  }) : super(key: key);
 
   @override
   _AnimatedTextWidgetState createState() => _AnimatedTextWidgetState();
@@ -251,6 +267,7 @@ class AnimatedTextWidget extends StatefulWidget {
 
 class _AnimatedTextWidgetState extends State<AnimatedTextWidget> {
   late TextEditingController _textController;
+  late Ticker _ticker;
   int currentIndex = 0;
   bool forward = true;
 
@@ -258,33 +275,32 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget> {
   void initState() {
     super.initState();
     _textController = TextEditingController();
-    _startTypingAnimation();
+    _ticker = Ticker(_onTick);
+    _ticker.start();
   }
 
-  void _startTypingAnimation() {
-    Timer.periodic(Duration(milliseconds: widget.typingSpeed), (timer) {
-      if (forward) {
-        if (currentIndex <= widget.label.length) {
-          setState(() {
-            _textController.text = widget.label.substring(0, currentIndex);
-            currentIndex++;
-          });
-        } else {
-          forward = false;
-          currentIndex = widget.label.length;
-        }
+  void _onTick(Duration elapsed) {
+    if (forward) {
+      if (currentIndex <= widget.label.length) {
+        setState(() {
+          _textController.text = widget.label.substring(0, currentIndex);
+          currentIndex++;
+        });
       } else {
-        if (currentIndex >= 0) {
-          setState(() {
-            _textController.text = widget.label.substring(0, currentIndex);
-            currentIndex--;
-          });
-        } else {
-          forward = true;
-          currentIndex = 0;
-        }
+        forward = false;
+        currentIndex = widget.label.length;
       }
-    });
+    } else {
+      if (currentIndex >= 0) {
+        setState(() {
+          _textController.text = widget.label.substring(0, currentIndex);
+          currentIndex--;
+        });
+      } else {
+        forward = true;
+        currentIndex = 0;
+      }
+    }
   }
 
   @override
@@ -293,7 +309,7 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget> {
       controller: _textController,
       style: widget.style,
       enabled: false,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         border: InputBorder.none,
       ),
     );
@@ -302,6 +318,7 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget> {
   @override
   void dispose() {
     _textController.dispose();
+    _ticker.dispose();
     super.dispose();
   }
-}
+}*/

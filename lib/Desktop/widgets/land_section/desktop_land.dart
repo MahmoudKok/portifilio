@@ -1,11 +1,11 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../helpers/constants.dart';
-import '../../../helpers/responsive.dart';
 import 'land_section_widgets.dart';
 
 class DesktopLand extends StatefulWidget {
@@ -37,6 +37,7 @@ class _DesktopLandState extends State<DesktopLand>
 
   late Animation<Alignment> _alignmentAnimation;
   late AnimationController _controller;
+  @override
   void dispose() {
     _controller.dispose();
 
@@ -104,7 +105,7 @@ class _DesktopLandState extends State<DesktopLand>
 
     return Container(
       width: screenWidth,
-      height: screenHeight * 1.75,
+      height: screenWidth > 1230 ? screenHeight * 1.75 : screenHeight * 1.5,
       padding: EdgeInsets.symmetric(
         horizontal: screenWidth * 0.02,
         vertical: screenHeight * 0.001,
@@ -118,12 +119,12 @@ class _DesktopLandState extends State<DesktopLand>
         fit: StackFit.loose,
         children: [
           ImageFiltered(
-            imageFilter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.8),
+            imageFilter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0),
             child: RandomCirclesWithLines(
               isDesktop: true,
               containerWidth: screenWidth,
-              containerHeight: screenHeight,
-              numberOfCircles: 50,
+              containerHeight: screenHeight * 1.75,
+              numberOfCircles: 10,
             ),
           ),
           Row(
@@ -345,7 +346,7 @@ class _DesktopLandState extends State<DesktopLand>
                         ],
                       ),
                     ),
-                    SizedBox(height: screenHeight * 0.08),
+                    SizedBox(height: screenHeight * 0.01),
                     Expanded(
                       flex: 0,
                       child: Container(
@@ -356,27 +357,28 @@ class _DesktopLandState extends State<DesktopLand>
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                            Expanded(
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                  Text(
-                                    'Linkedin',
-                                    style: GoogleFonts.anton(
-                                      color: kyellow,
-                                      fontSize: screenWidth * 0.04,
-                                      fontWeight: FontWeight.w300,
+                            FittedBox(
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Linkedin',
+                                      style: GoogleFonts.anton(
+                                        color: kyellow,
+                                        fontSize: screenWidth * 0.04,
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    '+1400 followers',
-                                    style: GoogleFonts.anton(
-                                      color: kpink,
-                                      fontSize: screenWidth * 0.02,
-                                      fontWeight: FontWeight.w100,
+                                    Text(
+                                      '+1500 followers',
+                                      style: GoogleFonts.anton(
+                                        color: kpink,
+                                        fontSize: screenWidth * 0.02,
+                                        fontWeight: FontWeight.w100,
+                                      ),
                                     ),
-                                  ),
-                                ])),
+                                  ]),
+                            ),
                             Expanded(
                                 child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -427,7 +429,7 @@ class _DesktopLandState extends State<DesktopLand>
               Expanded(
                 flex: 3,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Image.asset(
                     "assets/images/land_screen.png", // Replace with your image asset path
 

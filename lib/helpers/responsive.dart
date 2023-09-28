@@ -14,6 +14,6 @@ class Responsive {
   }
 
   bool isDesktop(BuildContext context) {
-    return screenWidth(context) >= 1008;
+    return screenWidth(context) >= 1007;
   }
 }

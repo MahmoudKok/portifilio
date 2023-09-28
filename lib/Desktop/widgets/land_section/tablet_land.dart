@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portifilio/Desktop/widgets/land_section/land_section_widgets.dart';
@@ -33,6 +35,7 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
 
   late Animation<Alignment> _alignmentAnimation;
   late AnimationController _controller;
+  @override
   void dispose() {
     _controller.dispose();
 
@@ -99,8 +102,10 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
     double screenHeight = widget.screenHeight!;
     var careerTextSizeMob = screenWidth * 0.12;
     return Container(
-      height: screenWidth > 877 ? screenHeight * 2 * 1.2 : screenHeight * 2,
-      width: screenWidth,
+      height: screenWidth > 877
+          ? screenHeight * 1.8
+          : (screenWidth < 877 ? screenHeight * 1.7 : screenHeight),
+      width: screenWidth * 2,
       padding: EdgeInsets.symmetric(
         horizontal: screenWidth * 0.05,
         vertical: 20,
@@ -114,17 +119,13 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
-            flex: 2,
-            child: RandomCirclesWithLines(
-              isDesktop: false,
-              containerWidth: screenWidth,
-              containerHeight: screenHeight * 2 * 0.2,
-              numberOfCircles: 50,
-            ),
+          RandomCirclesWithLines(
+            isDesktop: false,
+            containerWidth: screenWidth,
+            containerHeight: screenHeight * 2 * 0.2,
+            numberOfCircles: 10,
           ),
-          Expanded(
-            flex: 6,
+          FittedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -341,81 +342,88 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                   ],
                 ),
                 SizedBox(height: screenHeight * 2 * 0.001),
-                Expanded(
-                  flex: 0,
-                  child: Container(
-
-                      // height: screenHeight*2 * 0.3,
-                      // width: screenWidth,
+                Container(
+                    height: screenHeight * 2 * 0.3,
+                    width: screenWidth * 1.2,
+                    child: FittedBox(
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                        Expanded(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                              Text(
-                                'Linkedin',
-                                style: GoogleFonts.anton(
-                                  color: kyellow,
-                                  fontSize: screenWidth * 0.08,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                              Text(
-                                '+1400 followers',
-                                style: GoogleFonts.anton(
-                                  color: kpink,
-                                  fontSize: screenWidth * 0.04,
-                                  fontWeight: FontWeight.w100,
-                                ),
-                              ),
-                            ])),
-                        Expanded(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                              Text(
-                                'GitHub',
-                                style: GoogleFonts.anton(
-                                  color: kyellow,
-                                  fontSize: screenWidth * 0.08,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                              Text(
-                                '+8 Projects',
-                                style: GoogleFonts.anton(
-                                  color: kpink,
-                                  fontSize: screenWidth * 0.04,
-                                  fontWeight: FontWeight.w100,
-                                ),
-                              ),
-                            ])),
-                        Expanded(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                              Text(
-                                'Experince',
-                                style: GoogleFonts.anton(
-                                  color: kyellow,
-                                  fontSize: screenWidth * 0.07,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                              Text(
-                                '+2 Years',
-                                style: GoogleFonts.anton(
-                                  color: kpink,
-                                  fontSize: screenWidth * 0.04,
-                                  fontWeight: FontWeight.w100,
-                                ),
-                              ),
-                            ]))
-                      ])),
-                )
+                            FittedBox(
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Linkedin',
+                                      style: GoogleFonts.anton(
+                                        color: kyellow,
+                                        fontSize: screenWidth * 0.08,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                    Text(
+                                      '+1500 followers',
+                                      style: GoogleFonts.anton(
+                                        color: kpink,
+                                        fontSize: screenWidth * 0.04,
+                                        fontWeight: FontWeight.w100,
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                            SizedBox(
+                              width: screenWidth * 0.1,
+                            ),
+                            FittedBox(
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'GitHub',
+                                      style: GoogleFonts.anton(
+                                        color: kyellow,
+                                        fontSize: screenWidth * 0.08,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                    Text(
+                                      '+8 Projects',
+                                      style: GoogleFonts.anton(
+                                        color: kpink,
+                                        fontSize: screenWidth * 0.04,
+                                        fontWeight: FontWeight.w100,
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                            SizedBox(
+                              width: screenWidth * 0.1,
+                            ),
+                            FittedBox(
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Experince',
+                                      style: GoogleFonts.anton(
+                                        color: kyellow,
+                                        fontSize: screenWidth * 0.07,
+                                        fontWeight: FontWeight.w300,
+                                      ),
+                                    ),
+                                    Text(
+                                      '+2 Years',
+                                      style: GoogleFonts.anton(
+                                        color: kpink,
+                                        fontSize: screenWidth * 0.04,
+                                        fontWeight: FontWeight.w100,
+                                      ),
+                                    ),
+                                  ]),
+                            )
+                          ]),
+                    ))
               ],
             ),
           ),

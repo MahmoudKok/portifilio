@@ -1,12 +1,23 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../helpers/constants.dart';
 import '../../helpers/responsive.dart';
 import '../models/experinceModel.dart';
 
-class MyExperincesScreen extends StatelessWidget {
+class MyExperincesScreen extends StatefulWidget {
   MyExperincesScreen({super.key});
+
+  @override
+  State<MyExperincesScreen> createState() => _MyExperincesScreenState();
+}
+
+class _MyExperincesScreenState extends State<MyExperincesScreen> {
+  final ScrollController _scrollController = ScrollController();
+
   List<ExperinceModel> experince = [
     ExperinceModel(
       name: 'ICPC',
@@ -33,6 +44,7 @@ class MyExperincesScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     Responsive res = Responsive();
+
     bool isWideScreen = res.isDesktop(context);
     return Container(
       decoration: BoxDecoration(
@@ -48,26 +60,103 @@ class MyExperincesScreen extends StatelessWidget {
             style: headlabel(isWideScreen),
           ),
           const SizedBox(height: 20.0),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal, // Allow horizontal scrolling
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: experince.map((experience) {
-                return Row(
-                  children: [
-                    ExperienceItem(
-                      screenWidth: screenWidth,
-                      screenHeight: screenHeight,
-                      experience: experience,
-                      isWideScreen: isWideScreen,
-                    ),
-                    SizedBox(
-                        width: screenWidth *
-                            0.05), // Add spacing between items (adjust as needed)
-                  ],
-                );
-              }).toList(),
-            ),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  scrollDirection:
+                      Axis.horizontal, // Allow horizontal scrolling
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: experince.map((experience) {
+                      return Row(
+                        children: [
+                          ExperienceItem(
+                            screenWidth: screenWidth,
+                            screenHeight: screenHeight,
+                            experience: experience,
+                            isWideScreen: isWideScreen,
+                          ),
+                          SizedBox(
+                              width: screenWidth *
+                                  0.05), // Add spacing between items (adjust as needed)
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ),
+              Visibility(
+                visible: res.isDesktop(context),
+                child: Padding(
+                  padding: EdgeInsets.all(10.sp),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          _scrollController.animateTo(
+                            _scrollController.offset - screenWidth * 0.2,
+                            duration: Duration(milliseconds: 100),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        child: Container(
+                          width: 30.sp,
+                          height: 30.sp,
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    color: kdarkpurble,
+                                    blurRadius: 5,
+                                    spreadRadius: 5)
+                              ],
+                              color: kdarkpurble.withOpacity(0.1),
+                              shape: BoxShape.circle),
+                          child: Center(
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _scrollController.animateTo(
+                            _scrollController.offset + screenWidth * 0.2,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        child: Container(
+                          width: 30.sp,
+                          height: 30.sp,
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    color: kdarkpurble,
+                                    blurRadius: 5,
+                                    spreadRadius: 5)
+                              ],
+                              color: kdarkpurble.withOpacity(0.1),
+                              shape: BoxShape.circle),
+                          child: Center(
+                            child: Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: white,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
           )
         ],
       ),
@@ -82,7 +171,8 @@ class ExperienceItem extends StatefulWidget {
   final bool isWideScreen;
 
   const ExperienceItem(
-      {super.key, required this.screenWidth,
+      {super.key,
+      required this.screenWidth,
       required this.experience,
       required this.isWideScreen,
       required this.screenHeight});
@@ -96,10 +186,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
 
   @override
   Widget build(BuildContext context) {
-    double cardSize = widget.isWideScreen
-        ? widget.screenWidth * 0.3
-        : widget.screenWidth * 0.1;
-    double imageWidth = cardSize * 0.6;
+    double cardSize = widget.screenWidth * 0.5;
     double labelWidth = cardSize * 0.4;
 
     return GestureDetector(
@@ -122,7 +209,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           width: cardSize,
-          height: cardSize * 1.3,
+          height: cardSize * 0.8,
           decoration: BoxDecoration(
             color: isHovered ? konhoverpurble : kdarkpurble,
             borderRadius: BorderRadius.circular(20.0),
@@ -137,26 +224,32 @@ class _ExperienceItemState extends State<ExperienceItem> {
               child: isHovered
                   ? Padding(
                       padding: EdgeInsets.all(cardSize * 0.01),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            widget.experience.name!,
-                            style: GoogleFonts.raleway(
-                              fontSize: labelWidth * 0.3,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 8.0),
-                          Text(
-                            widget.experience.explain!,
-                            style: GoogleFonts.raleway(
+                      child: FittedBox(
+                        alignment: Alignment.topCenter,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              widget.experience.name!,
+                              style: GoogleFonts.raleway(
+                                fontSize: 30.sp,
+                                fontWeight: FontWeight.bold,
                                 color: Colors.white,
-                                fontSize: cardSize * 0.6 * 0.1),
-                          ),
-                        ],
+                              ),
+                            ),
+                            const SizedBox(height: 8.0),
+                            SizedBox(
+                              width: 60.w,
+                              child: Text(
+                                widget.experience.explain!,
+                                softWrap: true,
+                                style: GoogleFonts.raleway(
+                                    color: Colors.white, fontSize: 10.sp),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   : Stack(
@@ -212,5 +305,99 @@ class _ExperienceItemState extends State<ExperienceItem> {
         ),
       ),
     );
+  }
+}
+
+class HorizontalScrollWithButtons extends StatefulWidget {
+  @override
+  _HorizontalScrollWithButtonsState createState() =>
+      _HorizontalScrollWithButtonsState();
+}
+
+class _HorizontalScrollWithButtonsState
+    extends State<HorizontalScrollWithButtons> {
+  final ScrollController _scrollController = ScrollController();
+
+  // Define the amount of scroll when buttons are pressed.
+  final double scrollAmount = 100.0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            ElevatedButton(
+              onPressed: () {
+                _scrollController.animateTo(
+                  _scrollController.offset - scrollAmount,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              },
+              child: Text('Scroll Left'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                _scrollController.animateTo(
+                  _scrollController.offset + scrollAmount,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              },
+              child: Text('Scroll Right'),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 200, // Set the height of the horizontal scrollable row
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            controller: _scrollController,
+            children: <Widget>[
+              // Your horizontally scrollable content goes here
+              Container(
+                width: 300, // Set the width of each item as needed
+                color: Colors.blue,
+                child: Center(
+                  child: Text(
+                    'Item 1',
+                    style: TextStyle(fontSize: 24, color: Colors.white),
+                  ),
+                ),
+              ),
+              Container(
+                width: 300,
+                color: Colors.green,
+                child: Center(
+                  child: Text(
+                    'Item 2',
+                    style: TextStyle(fontSize: 24, color: Colors.white),
+                  ),
+                ),
+              ),
+              Container(
+                width: 300,
+                color: Colors.orange,
+                child: Center(
+                  child: Text(
+                    'Item 3',
+                    style: TextStyle(fontSize: 24, color: Colors.white),
+                  ),
+                ),
+              ),
+              // Add more items as needed
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }

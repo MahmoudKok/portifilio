@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:async';
 
@@ -134,7 +135,6 @@ class _ProjectItemState extends State<ProjectItem> {
   @override
   Widget build(BuildContext context) {
     double cardSize = widget.screenWidth * 0.3;
-    double imageWidth = cardSize * 0.6;
     double labelWidth = cardSize * 0.2;
 
     return MouseRegion(
@@ -163,7 +163,7 @@ class _ProjectItemState extends State<ProjectItem> {
           height: isHovered ? cardSize * 1.4 : cardSize * 1.3,
           decoration: BoxDecoration(
             color: isHovered ? konhoverpurble : kdarkpurble,
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(10.sp),
             border: isHovered
                 ? Border.all(color: konhoverpurble, width: 2.0)
                 : null,
@@ -174,16 +174,17 @@ class _ProjectItemState extends State<ProjectItem> {
                   ? Padding(
                       padding: EdgeInsets.all(cardSize * 0.01),
                       child: Column(
-                        key: const ValueKey<int>(2),
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            widget.project.name!,
-                            style: TextStyle(
-                              fontSize: labelWidth * 0.8,
-                              fontWeight: FontWeight.bold,
-                              color: kyellow,
+                          FittedBox(
+                            child: Text(
+                              widget.project.name!,
+                              style: TextStyle(
+                                fontSize: labelWidth * 0.8,
+                                fontWeight: FontWeight.bold,
+                                color: kyellow,
+                              ),
                             ),
                           ),
                           SizedBox(height: cardSize * 0.01),
@@ -211,9 +212,6 @@ class _ProjectItemState extends State<ProjectItem> {
                           Text(
                             widget.project.explain!,
                             style: TextStyle(
-                              fontSize: widget.project.name!.length >= 14
-                                  ? labelWidth * 0.2
-                                  : labelWidth * 0.25,
                               color: white,
                             ),
                           ),
@@ -223,7 +221,6 @@ class _ProjectItemState extends State<ProjectItem> {
                   : Padding(
                       padding: EdgeInsets.all(cardSize * 0.01),
                       child: Column(
-                        key: const ValueKey<int>(1),
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -232,7 +229,7 @@ class _ProjectItemState extends State<ProjectItem> {
                             width: cardSize,
                             decoration: BoxDecoration(
                               color: kyellow,
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10.sp),
                               image: DecorationImage(
                                 image: AssetImage(widget.project.photo!),
                                 fit: BoxFit.cover,

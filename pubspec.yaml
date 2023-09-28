@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^5.1.0
   url_launcher: ^6.1.14
+  get: ^4.6.6
+  sizer: ^2.0.15
+  responsive_framework: ^1.1.1
 
 dev_dependencies:
   flutter_test:
