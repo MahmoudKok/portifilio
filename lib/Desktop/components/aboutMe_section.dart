@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portifilio/Desktop/widgets/aboutMe_section/desktop_aboutme.dart';
 import 'package:portifilio/Desktop/widgets/aboutMe_section/mobile_aboutme.dart';
 import 'package:portifilio/Desktop/widgets/aboutMe_section/tablet_aboutme.dart';
-import 'package:portifilio/helpers/constants.dart';
 import 'package:portifilio/helpers/responsive.dart';
 
 class AboutMeSection extends StatelessWidget {

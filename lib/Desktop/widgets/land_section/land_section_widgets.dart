@@ -1,12 +1,9 @@
-import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:portifilio/Desktop/controllers/Animted_text_controller.dart';
-import 'package:portifilio/Desktop/controllers/random_circles_controller.dart';
 
 import '/../../helpers/constants.dart';
 
@@ -226,7 +223,7 @@ class AnimatedTextWidget extends StatelessWidget {
   final TextStyle style;
   final Duration animationDuration;
 
-  AnimatedTextWidget({
+  const AnimatedTextWidget({super.key, 
     required this.label,
     required this.style,
     this.animationDuration = const Duration(milliseconds: 100),

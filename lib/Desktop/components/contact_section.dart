@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portifilio/Desktop/widgets/contact_section/desktop_contact.dart';
 import 'package:portifilio/Desktop/widgets/contact_section/mobile_contact.dart';
 import 'package:portifilio/Desktop/widgets/contact_section/tablet_contact.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../helpers/constants.dart';
 import '../../helpers/responsive.dart';
 import '../models/contactModel.dart';
 

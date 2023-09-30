@@ -33,7 +33,7 @@ class CirclesController extends GetxController {
   }
 
   void _startAnimation() {
-    const duration = const Duration(milliseconds: 16);
+    const duration = Duration(milliseconds: 16);
     Timer.periodic(duration, (_) {
       for (int i = 0; i < points.length; i++) {
         points[i] += velocities[i];

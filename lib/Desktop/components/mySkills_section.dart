@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portifilio/Desktop/widgets/skills_section/desktop_skill.dart';
 import 'package:portifilio/Desktop/widgets/skills_section/mobile_skill.dart';
 import 'package:portifilio/Desktop/widgets/skills_section/tablet_skill.dart';
 
-import '../../helpers/constants.dart';
 import '../../helpers/responsive.dart';
 import '../models/skillModel.dart';
 

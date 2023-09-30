@@ -30,7 +30,6 @@ class _CodingItemState extends State<CodingItem> {
   @override
   Widget build(BuildContext context) {
     double cardSize = 400.w;
-    Responsive res = Responsive();
 
     return GestureDetector(
       onTap: () {
@@ -65,68 +64,72 @@ class _CodingItemState extends State<CodingItem> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 1.h),
+                  padding: EdgeInsets.only(top: 5.sp),
                   child: CircleAvatar(
-                    radius: 35.sp,
+                    radius: 50.sp,
                     backgroundImage: AssetImage(widget.knowledge.photo!),
                   ),
                 ),
                 SizedBox(
-                  height: 5.h,
+                  height: 30.sp,
                 ),
                 SizedBox(
-                  height: 10.h,
-                  width: 60.w,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FittedBox(
-                        child: Text(
-                          widget.knowledge.name!,
-                          style: GoogleFonts.signikaNegative(
-                            fontSize: 35.sp,
-                            fontWeight: FontWeight.bold,
-                            color: white,
-                          ),
-                        ),
-                      ),
-                      OctagramStarShape(
-                        size: 40.sp,
-                        color: ktail3,
-                        child: Padding(
-                          padding: EdgeInsets.all(5.sp),
+                  height: 80.sp,
+                  width: 150.sp,
+                  child: FittedBox(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        FittedBox(
                           child: Text(
-                            "${widget.knowledge.percent!.toStringAsFixed(0)[0]}/10",
+                            widget.knowledge.name!,
                             style: GoogleFonts.signikaNegative(
-                              fontSize: 20.sp,
+                              fontSize: 50.sp,
                               fontWeight: FontWeight.bold,
                               color: white,
                             ),
                           ),
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          width: 20.sp,
+                        ),
+                        OctagramStarShape(
+                          size: 75.sp,
+                          color: ktail3,
+                          child: Padding(
+                            padding: EdgeInsets.all(5.sp),
+                            child: Text(
+                              "${widget.knowledge.percent!.toStringAsFixed(0)[0]}/10",
+                              style: GoogleFonts.signikaNegative(
+                                fontSize: 30.sp,
+                                fontWeight: FontWeight.bold,
+                                color: white,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 20.sp,
                 ),
                 SizedBox(
-                  width: 60.w,
+                  height: 20.sp,
+                  width: 80.w,
                   child: Center(
                     child: FittedBox(
                       child: RatingBar(
                         rating: widget.knowledge.percent! ~/ 10,
-                        size: (60.w) / 10,
+                        size: (350.sp) / 10,
                         filledColor: kpink,
                         emptyColor: kyellow,
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 2.h,
-                )
+                SizedBox(height: 20.sp)
               ],
             ),
           ),

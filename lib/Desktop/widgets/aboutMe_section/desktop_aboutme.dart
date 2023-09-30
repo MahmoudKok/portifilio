@@ -30,61 +30,73 @@ class DesktopAboutMe extends StatelessWidget {
       ),
       child: Padding(
         padding: EdgeInsets.only(left: 2.w, right: 4.h),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              'About Me',
-              style: GoogleFonts.changa(
-                color: darkWihte,
-                fontSize: 25.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    children: [
-                      Image.asset('assets/images/about_me.png'),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Image.asset('assets/images/about_me2.png'),
-                    ],
+        child: FittedBox(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              FittedBox(
+                child: Text(
+                  'About Me',
+                  style: GoogleFonts.changa(
+                    color: darkWihte,
+                    fontSize: 35.sp,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 6.w),
-                Expanded(
-                  flex: 3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        aboutMe,
-                        style: GoogleFonts.changa(
-                          color: darkWihte,
-                          fontSize: isWideScreen ? 18 : 16,
+              ),
+              SizedBox(height: 5.h),
+              FittedBox(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 80.w,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset('assets/images/about_me.png'),
+                          SizedBox(
+                            height: 100.h,
+                          ),
+                          Image.asset('assets/images/about_me2.png'),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 6.w),
+                    FittedBox(
+                      child: SizedBox(
+                        width: screenWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 150.w,
+                              child: Text(
+                                aboutMe,
+                                style: GoogleFonts.changa(
+                                  color: darkWihte,
+                                  fontSize: 15.sp,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 40),
+                            Text(
+                              'MAHM',
+                              style: GoogleFonts.greatVibes(
+                                  color: Colors.white,
+                                  fontSize: 30.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 40),
-                      Text(
-                        'MAHM',
-                        style: GoogleFonts.greatVibes(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

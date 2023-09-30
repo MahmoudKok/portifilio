@@ -1,8 +1,7 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portifilio/Desktop/widgets/land_section/land_section_widgets.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../helpers/constants.dart';
@@ -102,10 +101,6 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
     double screenHeight = widget.screenHeight!;
     var careerTextSizeMob = screenWidth * 0.12;
     return Container(
-      height: screenWidth > 877
-          ? screenHeight * 1.8
-          : (screenWidth < 877 ? screenHeight * 1.7 : screenHeight),
-      width: screenWidth * 2,
       padding: EdgeInsets.symmetric(
         horizontal: screenWidth * 0.05,
         vertical: 20,
@@ -126,6 +121,7 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
             numberOfCircles: 10,
           ),
           FittedBox(
+            alignment: Alignment.topCenter,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -134,12 +130,11 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                   "Hi, I'm",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: screenWidth * 0.1,
+                    fontSize: 25.sp,
                     fontWeight: FontWeight.w200,
                   ),
                 ),
-                Expanded(
-                  flex: 0,
+                FittedBox(
                   child: RichText(
                     textAlign: TextAlign.justify,
                     text: TextSpan(
@@ -147,18 +142,18 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                         TextSpan(
                           text: "Mahmoud",
                           style: GoogleFonts.nunito(
-                            letterSpacing: screenWidth * 0.005,
+                            letterSpacing: 2.sp,
                             color: ktail3,
-                            fontSize: screenWidth * 0.15,
+                            fontSize: 40.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         TextSpan(
                           text: " Kokeh",
                           style: GoogleFonts.nunito(
-                            letterSpacing: screenWidth * 0.005,
+                            letterSpacing: 2.sp,
                             color: kyellow,
-                            fontSize: screenWidth * 0.15,
+                            fontSize: 40.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -172,41 +167,21 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                             fontSize: screenWidth * 0.12,
                             fontWeight: FontWeight.w500,
                           )),*/
-                Expanded(
-                  flex: 0,
-                  child: AnimatedTextWidget(
-                      label: 'Flutter developer',
-                      style: GoogleFonts.anton(
-                        color: darkWihte,
-                        fontSize: careerTextSizeMob.clamp(
-                            screenWidth * 0.06, screenWidth * 0.12),
-                        fontWeight: FontWeight.w500,
-                      )),
-                ),
-                Expanded(
-                  flex: 0,
-                  child: AnimatedTextWidget(
-                      label: 'Data Scientist',
-                      style: GoogleFonts.anton(
-                        color: darkWihte,
-                        fontSize: screenWidth * 0.12,
-                        fontWeight: FontWeight.w500,
-                      )),
-                ),
-                const SizedBox(height: 10),
-                /*SizedBox(
-                        width: screenWidth * 0.4,
-                        child: Text(
-                          widget.landDescribe,
-                          maxLines: 10,
-                          style: TextStyle(
-                              color: darkWihte,
-                              fontSize: screenWidth * 0.1,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      const SizedBox(height: 20),*/
-
+                AnimatedTextWidget(
+                    label: 'Flutter developer',
+                    style: GoogleFonts.anton(
+                      color: darkWihte,
+                      fontSize: 35.sp,
+                      fontWeight: FontWeight.w500,
+                    )),
+                AnimatedTextWidget(
+                    label: 'Data Scientist',
+                    style: GoogleFonts.anton(
+                      color: darkWihte,
+                      fontSize: 35.sp,
+                      fontWeight: FontWeight.w500,
+                    )),
+                SizedBox(height: 10.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -233,15 +208,15 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                         stopAnimation();
                       },
                       child: SizedBox(
-                        height: screenHeight * 2 * 0.07,
-                        width: screenWidth * 0.23,
+                        height: 10.h,
+                        width: 40.w,
                         child: Stack(
                           children: [
                             Align(
                               alignment: Alignment.bottomLeft,
                               child: Container(
-                                height: screenHeight * 2 * 0.05,
-                                width: screenWidth * 0.22,
+                                height: 8.h,
+                                width: 38.w,
                                 decoration: BoxDecoration(
                                   color: kpink,
                                   borderRadius: BorderRadius.circular(10),
@@ -270,8 +245,8 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                                   }
                                 },
                                 child: Container(
-                                  height: screenHeight * 2 * 0.05,
-                                  width: screenWidth * 0.22,
+                                  height: 8.h,
+                                  width: 38.w,
                                   decoration: BoxDecoration(
                                     color: kyellow,
                                     borderRadius: BorderRadius.circular(10),
@@ -281,7 +256,7 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                                       'Download CV',
                                       style: TextStyle(
                                         color: kpurble,
-                                        fontSize: screenWidth * 0.03,
+                                        fontSize: 12.sp,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -293,7 +268,7 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                         ),
                       ),
                     ),
-                    SizedBox(width: screenWidth * 0.01),
+                    SizedBox(width: 6.w),
                     MaterialButton(
                       onPressed: () async {
                         if (await canLaunchUrl(
@@ -307,10 +282,10 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                       },
                       hoverColor: kdarkpurble,
                       child: Container(
-                        width: screenWidth * 0.25,
-                        height: screenHeight * 2 * 0.055,
+                        height: 10.h,
+                        width: 40.w,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(8.sp),
                           color: kpurble,
                         ),
                         child: Center(
@@ -322,17 +297,17 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                                 'Contact',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: screenWidth * 0.04,
+                                  fontSize: 12.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               SizedBox(
-                                width: screenWidth * 0.01,
+                                width: 5.sp,
                               ),
                               Icon(
                                 Icons.call,
                                 color: white,
-                                size: screenWidth * 0.035,
+                                size: 12.sp,
                               ),
                             ],
                           ),
@@ -341,89 +316,87 @@ class _TabletLandState extends State<TabletLand> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                SizedBox(height: screenHeight * 2 * 0.001),
-                Container(
-                    height: screenHeight * 2 * 0.3,
-                    width: screenWidth * 1.2,
+                SizedBox(height: 5.h),
+                SizedBox(
                     child: FittedBox(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            FittedBox(
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Linkedin',
-                                      style: GoogleFonts.anton(
-                                        color: kyellow,
-                                        fontSize: screenWidth * 0.08,
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                    Text(
-                                      '+1500 followers',
-                                      style: GoogleFonts.anton(
-                                        color: kpink,
-                                        fontSize: screenWidth * 0.04,
-                                        fontWeight: FontWeight.w100,
-                                      ),
-                                    ),
-                                  ]),
-                            ),
-                            SizedBox(
-                              width: screenWidth * 0.1,
-                            ),
-                            FittedBox(
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'GitHub',
-                                      style: GoogleFonts.anton(
-                                        color: kyellow,
-                                        fontSize: screenWidth * 0.08,
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                    Text(
-                                      '+8 Projects',
-                                      style: GoogleFonts.anton(
-                                        color: kpink,
-                                        fontSize: screenWidth * 0.04,
-                                        fontWeight: FontWeight.w100,
-                                      ),
-                                    ),
-                                  ]),
-                            ),
-                            SizedBox(
-                              width: screenWidth * 0.1,
-                            ),
-                            FittedBox(
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Experince',
-                                      style: GoogleFonts.anton(
-                                        color: kyellow,
-                                        fontSize: screenWidth * 0.07,
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                    Text(
-                                      '+2 Years',
-                                      style: GoogleFonts.anton(
-                                        color: kpink,
-                                        fontSize: screenWidth * 0.04,
-                                        fontWeight: FontWeight.w100,
-                                      ),
-                                    ),
-                                  ]),
-                            )
-                          ]),
-                    ))
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FittedBox(
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Linkedin',
+                                  style: GoogleFonts.anton(
+                                    color: kyellow,
+                                    fontSize: screenWidth * 0.08,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                Text(
+                                  '+1500 followers',
+                                  style: GoogleFonts.anton(
+                                    color: kpink,
+                                    fontSize: screenWidth * 0.04,
+                                    fontWeight: FontWeight.w100,
+                                  ),
+                                ),
+                              ]),
+                        ),
+                        SizedBox(
+                          width: screenWidth * 0.1,
+                        ),
+                        FittedBox(
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'GitHub',
+                                  style: GoogleFonts.anton(
+                                    color: kyellow,
+                                    fontSize: screenWidth * 0.08,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                Text(
+                                  '+8 Projects',
+                                  style: GoogleFonts.anton(
+                                    color: kpink,
+                                    fontSize: screenWidth * 0.04,
+                                    fontWeight: FontWeight.w100,
+                                  ),
+                                ),
+                              ]),
+                        ),
+                        SizedBox(
+                          width: screenWidth * 0.1,
+                        ),
+                        FittedBox(
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Experince',
+                                  style: GoogleFonts.anton(
+                                    color: kyellow,
+                                    fontSize: screenWidth * 0.07,
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
+                                Text(
+                                  '+2 Years',
+                                  style: GoogleFonts.anton(
+                                    color: kpink,
+                                    fontSize: screenWidth * 0.04,
+                                    fontWeight: FontWeight.w100,
+                                  ),
+                                ),
+                              ]),
+                        )
+                      ]),
+                ))
               ],
             ),
           ),

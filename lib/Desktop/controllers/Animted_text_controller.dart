@@ -26,7 +26,7 @@ class TypewriterController extends GetxController {
           await Future.delayed(animationDuration);
         }
       } else {
-        await Future.delayed(Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 2));
         for (int i = targetText.length; i >= 0; i--) {
           animatedText.value = targetText.substring(0, i);
           await Future.delayed(animationDuration);

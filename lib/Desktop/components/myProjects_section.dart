@@ -172,43 +172,48 @@ class _ProjectItemState extends State<ProjectItem> {
               duration: const Duration(milliseconds: 300),
               child: isHovered
                   ? Padding(
-                      padding: EdgeInsets.all(cardSize * 0.01),
+                      padding: EdgeInsets.all(1.sp),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           FittedBox(
-                            child: Text(
-                              widget.project.name!,
-                              style: TextStyle(
-                                fontSize: labelWidth * 0.8,
-                                fontWeight: FontWeight.bold,
-                                color: kyellow,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                widget.project.name!,
+                                style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: kyellow,
+                                ),
                               ),
                             ),
                           ),
-                          SizedBox(height: cardSize * 0.01),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.project.projectType!,
-                                style: TextStyle(
-                                    fontSize: labelWidth * 0.45,
-                                    color: white,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                width: labelWidth * 0.1,
-                              ),
-                              Icon(
-                                widget.project.icon!,
-                                color: white,
-                                size: labelWidth * 0.5,
-                              )
-                            ],
+                          SizedBox(height: 1.h),
+                          FittedBox(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.project.projectType!,
+                                  style: TextStyle(
+                                      fontSize: 20.sp,
+                                      color: white,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(
+                                  width: 5.sp,
+                                ),
+                                Icon(
+                                  widget.project.icon!,
+                                  color: white,
+                                  size: 25.sp,
+                                )
+                              ],
+                            ),
                           ),
-                          SizedBox(height: cardSize * 0.02),
+                          SizedBox(height: 1.h),
                           Text(
                             widget.project.explain!,
                             style: TextStyle(
@@ -219,7 +224,7 @@ class _ProjectItemState extends State<ProjectItem> {
                       ),
                     )
                   : Padding(
-                      padding: EdgeInsets.all(cardSize * 0.01),
+                      padding: EdgeInsets.all(1.sp),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -286,7 +291,7 @@ class _AutoScrollRowState extends State<AutoScrollRow> {
   void _startAutoScroll() {
     Timer.periodic(const Duration(milliseconds: 8), (timer) {
       if (_scrollController.hasClients && _isScrolling) {
-        _scrollPosition += 2.0; // Adjust the speed of scrolling here
+        _scrollPosition += 2.0.sp; // Adjust the speed of scrolling here
         if (_scrollPosition >= _scrollController.position.maxScrollExtent) {
           _scrollPosition = _scrollController.position.minScrollExtent;
         }

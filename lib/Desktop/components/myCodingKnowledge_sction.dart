@@ -1,12 +1,9 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:portifilio/Desktop/widgets/CodingKnowledge/desktop_coding.dart';
 import 'package:portifilio/Desktop/widgets/CodingKnowledge/mobile_coding.dart';
 import 'package:portifilio/Desktop/widgets/CodingKnowledge/tablet_coding.dart';
 
-import '../../helpers/constants.dart';
 import '../../helpers/responsive.dart';
 import '../models/codingModel.dart';
 

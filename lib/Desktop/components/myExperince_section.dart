@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
@@ -9,7 +7,7 @@ import '../../helpers/responsive.dart';
 import '../models/experinceModel.dart';
 
 class MyExperincesScreen extends StatefulWidget {
-  MyExperincesScreen({super.key});
+  const MyExperincesScreen({super.key});
 
   @override
   State<MyExperincesScreen> createState() => _MyExperincesScreenState();
@@ -55,9 +53,15 @@ class _MyExperincesScreenState extends State<MyExperincesScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            "My Experiences",
-            style: headlabel(isWideScreen),
+          SizedBox(
+            width: 60.w,
+            child: FittedBox(
+              child: Text(
+                "My Experinces",
+                maxLines: 1,
+                style: headlabel(isWideScreen),
+              ),
+            ),
           ),
           const SizedBox(height: 20.0),
           Stack(
@@ -100,15 +104,15 @@ class _MyExperincesScreenState extends State<MyExperincesScreen> {
                         onTap: () {
                           _scrollController.animateTo(
                             _scrollController.offset - screenWidth * 0.2,
-                            duration: Duration(milliseconds: 100),
+                            duration: const Duration(milliseconds: 100),
                             curve: Curves.easeInOut,
                           );
                         },
                         child: Container(
-                          width: 30.sp,
-                          height: 30.sp,
+                          width: 15.sp,
+                          height: 15.sp,
                           decoration: BoxDecoration(
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                     color: kdarkpurble,
                                     blurRadius: 5,
@@ -116,7 +120,7 @@ class _MyExperincesScreenState extends State<MyExperincesScreen> {
                               ],
                               color: kdarkpurble.withOpacity(0.1),
                               shape: BoxShape.circle),
-                          child: Center(
+                          child: const Center(
                             child: Icon(
                               Icons.arrow_back_ios,
                               color: white,
@@ -128,15 +132,15 @@ class _MyExperincesScreenState extends State<MyExperincesScreen> {
                         onTap: () {
                           _scrollController.animateTo(
                             _scrollController.offset + screenWidth * 0.2,
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             curve: Curves.easeInOut,
                           );
                         },
                         child: Container(
-                          width: 30.sp,
-                          height: 30.sp,
+                          width: 15.sp,
+                          height: 15.sp,
                           decoration: BoxDecoration(
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                     color: kdarkpurble,
                                     blurRadius: 5,
@@ -144,7 +148,7 @@ class _MyExperincesScreenState extends State<MyExperincesScreen> {
                               ],
                               color: kdarkpurble.withOpacity(0.1),
                               shape: BoxShape.circle),
-                          child: Center(
+                          child: const Center(
                             child: Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: white,
@@ -235,7 +239,7 @@ class _ExperienceItemState extends State<ExperienceItem> {
                               style: GoogleFonts.raleway(
                                 fontSize: 30.sp,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: kyellow,
                               ),
                             ),
                             const SizedBox(height: 8.0),
@@ -309,6 +313,8 @@ class _ExperienceItemState extends State<ExperienceItem> {
 }
 
 class HorizontalScrollWithButtons extends StatefulWidget {
+  const HorizontalScrollWithButtons({super.key});
+
   @override
   _HorizontalScrollWithButtonsState createState() =>
       _HorizontalScrollWithButtonsState();
@@ -332,21 +338,21 @@ class _HorizontalScrollWithButtonsState
               onPressed: () {
                 _scrollController.animateTo(
                   _scrollController.offset - scrollAmount,
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
                 );
               },
-              child: Text('Scroll Left'),
+              child: const Text('Scroll Left'),
             ),
             ElevatedButton(
               onPressed: () {
                 _scrollController.animateTo(
                   _scrollController.offset + scrollAmount,
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
                 );
               },
-              child: Text('Scroll Right'),
+              child: const Text('Scroll Right'),
             ),
           ],
         ),
@@ -360,7 +366,7 @@ class _HorizontalScrollWithButtonsState
               Container(
                 width: 300, // Set the width of each item as needed
                 color: Colors.blue,
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Item 1',
                     style: TextStyle(fontSize: 24, color: Colors.white),
@@ -370,7 +376,7 @@ class _HorizontalScrollWithButtonsState
               Container(
                 width: 300,
                 color: Colors.green,
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Item 2',
                     style: TextStyle(fontSize: 24, color: Colors.white),
@@ -380,7 +386,7 @@ class _HorizontalScrollWithButtonsState
               Container(
                 width: 300,
                 color: Colors.orange,
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Item 3',
                     style: TextStyle(fontSize: 24, color: Colors.white),

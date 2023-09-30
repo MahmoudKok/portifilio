@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portifilio/helpers/responsive.dart';
 import 'package:sizer/sizer.dart';
@@ -34,42 +33,50 @@ class _SkillItemState extends State<SkillItem> {
         ? widget.screenWidth * 0.13
         : widget.screenWidth * 0.11;
 
-    return MouseRegion(
-      onEnter: (_) {
+    return GestureDetector(
+      onTap: () {
         setState(() {
-          isHovered = true;
+          isHovered = !isHovered;
         });
       },
-      onExit: (_) {
-        setState(() {
-          isHovered = false;
-        });
-      },
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        width: isHovered ? hoverCardSize : cardSize,
-        height: isHovered ? hoverCardSize : cardSize,
-        decoration: BoxDecoration(
-          color: isHovered ? konhoverpurble : kdarkpurble,
-          borderRadius: BorderRadius.circular(10.0),
-          border:
-              isHovered ? Border.all(color: konhoverpurble, width: 2.0) : null,
-        ),
-        child: AnimatedSwitcher(
-          duration: const Duration(milliseconds: 200),
-          child: isHovered
-              ? SkillCardText(
-                  skill: widget.skill,
-                  isWideScreen: widget.isWideScreen,
-                  cardSize: cardSize,
-                  hoverCardSize: hoverCardSize,
-                )
-              : SkillCardImage(
-                  skill: widget.skill,
-                  isWideScreen: widget.isWideScreen,
-                  cardSize: cardSize,
-                  hoverCardSize: hoverCardSize,
-                ),
+      child: MouseRegion(
+        onEnter: (_) {
+          setState(() {
+            isHovered = true;
+          });
+        },
+        onExit: (_) {
+          setState(() {
+            isHovered = false;
+          });
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          width: isHovered ? hoverCardSize : cardSize,
+          height: isHovered ? hoverCardSize : cardSize,
+          decoration: BoxDecoration(
+            color: isHovered ? konhoverpurble : kdarkpurble,
+            borderRadius: BorderRadius.circular(10.0),
+            border: isHovered
+                ? Border.all(color: konhoverpurble, width: 2.0)
+                : null,
+          ),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 200),
+            child: isHovered
+                ? SkillCardText(
+                    skill: widget.skill,
+                    isWideScreen: widget.isWideScreen,
+                    cardSize: cardSize,
+                    hoverCardSize: hoverCardSize,
+                  )
+                : SkillCardImage(
+                    skill: widget.skill,
+                    isWideScreen: widget.isWideScreen,
+                    cardSize: cardSize,
+                    hoverCardSize: hoverCardSize,
+                  ),
+          ),
         ),
       ),
     );
@@ -102,23 +109,21 @@ class SkillCardText extends StatelessWidget {
               child: Text(
                 skill.name!,
                 style: GoogleFonts.raleway(
-                  color: Colors.white,
+                  color: kyellow,
                   fontSize: 16.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             const SizedBox(height: 8.0),
-            Expanded(
-              flex: 2,
-              child: Text(
-                skill.explain!,
-                style: GoogleFonts.openSans(
-                    color: Colors.white,
-                    fontSize: rs.isDesktop(context)
-                        ? 8.sp
-                        : (rs.isTablet(context) ? 12.sp : 10.sp)),
-              ),
+            Text(
+              skill.explain!,
+              maxLines: 20,
+              style: GoogleFonts.openSans(
+                  color: Colors.white,
+                  fontSize: rs.isDesktop(context)
+                      ? 6.sp
+                      : (rs.isTablet(context) ? 12.sp : 10.sp)),
             ),
           ],
         ),

@@ -37,10 +37,14 @@ class DesktopContact extends StatelessWidget {
           child: Column(
             children: [
               Center(
-                child: FittedBox(
-                  child: Text(
-                    'Contact with me!',
-                    style: headlabel(true),
+                child: SizedBox(
+                  width: 60.w,
+                  child: FittedBox(
+                    child: Text(
+                      "Contact with me!",
+                      maxLines: 1,
+                      style: headlabel(true),
+                    ),
                   ),
                 ),
               ),
@@ -141,7 +145,7 @@ class DesktopContact extends StatelessWidget {
                             textColor: white,
                             inputType: TextInputType.text,
                             prefixIcon: const Icon(
-                              Icons.person,
+                              Icons.mail,
                             ),
                             placeholder: "Messege",
                             onTap: () {
@@ -174,13 +178,15 @@ class DesktopContact extends StatelessWidget {
                                     'mailto:mahmoudkoka39@gmail.com?subject=Mail from Portfolio &body=Hello,i\'m $fname $lname\n $message',
                                   );
                                 },
-                                child: Center(
-                                  child: Text(
-                                    'Submit',
-                                    style: GoogleFonts.firaSans(
-                                        color: white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15.sp),
+                                child: FittedBox(
+                                  child: Center(
+                                    child: Text(
+                                      'Submit',
+                                      style: GoogleFonts.firaSans(
+                                          color: white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15.sp),
+                                    ),
                                   ),
                                 ),
                               ),

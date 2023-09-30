@@ -30,10 +30,15 @@ class DesktopCoding extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "My Coding Knowledge",
-            maxLines: 1,
-            style: headlabel(isWideScreen),
+          SizedBox(
+            width: 60.w,
+            child: FittedBox(
+              child: Text(
+                "My Coding Knowledge",
+                maxLines: 1,
+                style: headlabel(isWideScreen),
+              ),
+            ),
           ),
           SizedBox(height: 1.h),
           GridView.builder(

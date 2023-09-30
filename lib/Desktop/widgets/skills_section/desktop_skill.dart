@@ -29,13 +29,15 @@ class DesktopSkill extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "My Skills",
-            style: headlabel(isWideScreen),
+          FittedBox(
+            child: Text(
+              "My Skills",
+              style: headlabel(isWideScreen),
+            ),
           ),
           const SizedBox(height: 20.0),
           GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4,
               crossAxisSpacing: 16.0,
               mainAxisSpacing: 16.0,

@@ -25,8 +25,8 @@ class DesktopMainScreen extends StatelessWidget {
     } else {
       print('Mobile');
     }
-    print('screenWidth : ' + screenWidth.toString());
-    print('screenHeight : ' + screenHeight.toString());
+    print('screenWidth : $screenWidth');
+    print('screenHeight : $screenHeight');
     return Scaffold(
       backgroundColor: kbackground,
       body: SingleChildScrollView(
@@ -45,7 +45,7 @@ class DesktopMainScreen extends StatelessWidget {
             SizedBox(
               height: screenHeight * 0.05,
             ),
-            MyExperincesScreen(),
+            const MyExperincesScreen(),
             SizedBox(
               height: screenHeight * 0.05,
             ),

@@ -89,7 +89,7 @@ class MobileContact extends StatelessWidget {
                       ),
                       BeautyTextfield(
                         width: double.maxFinite,
-                        height: screenHeight * 0.15,
+                        height: 20.h,
                         duration: const Duration(milliseconds: 300),
                         accentColor: kdarkpurble,
                         textColor: white,
@@ -110,7 +110,7 @@ class MobileContact extends StatelessWidget {
                       ),
                       BeautyTextfield(
                         width: double.maxFinite,
-                        height: screenHeight * 0.15,
+                        height: 20.h,
                         duration: const Duration(milliseconds: 300),
                         accentColor: kdarkpurble,
                         textColor: white,
@@ -131,7 +131,9 @@ class MobileContact extends StatelessWidget {
                       ),
                       BeautyTextfield(
                         width: double.maxFinite,
-                        height: screenHeight * 0.45,
+                        height: 60.h,
+                        suffixIcon:
+                            Icon(Icons.message, color: white, size: 20.sp),
                         duration: const Duration(milliseconds: 300),
                         accentColor: kdarkpurble,
                         textColor: white,
